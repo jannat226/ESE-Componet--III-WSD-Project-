@@ -1,6 +1,6 @@
 // import logo from "./logo.svg";
 // import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { Home } from "./pages/Home";
@@ -16,8 +16,8 @@ export const App = () => {
       <Router>
         <Routes>
           <Route path="/" exact Component={Home} />
-          <Route path="/explore" exact Component={Explore} />
-          <Route path="/contactus" exact Component={Contact} />
+          {/* <Route path="/explore" exact Component={Explore} /> */}
+          {/* <Route path="/contactus" exact Component={Contact} /> */}
           <Route path="/login" exact Component={Login} />
           <Route path="/signUp" exact Component={Signup} />
           <Route path="/timeCapsules" exact Component={TimeCapsules} />

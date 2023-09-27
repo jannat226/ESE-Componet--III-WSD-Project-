@@ -50,7 +50,7 @@ export const Footer = () => {
           </div>
         </div>
         <div class="footer-right col-md-4 col-sm-6">
-          <img class="logo" src={logo} width="70px" height="70px" />
+          {/* <img class="logo" src={logo} width="70px" height="70px" /> */}
           <p class="name"> Company Name &copy; 2016</p>
         </div>
         <div>
