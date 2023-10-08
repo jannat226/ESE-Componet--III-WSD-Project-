@@ -11,7 +11,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://suraj2023:12345@cluster0.awkkupy.mongodb.net/timecapsuleapp?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://suraj2023:{password}@cluster0.awkkupy.mongodb.net/timecapsuleapp?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Middleware
 app.use(bodyParser.json());
