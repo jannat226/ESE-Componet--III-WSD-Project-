@@ -4,7 +4,7 @@ export const Navbar = () => {
   return (
     <>
       <nav>
-        <img class="logo" src={logo} width="70px" height="70px" />
+        <img className="logo" src={logo} width="70px" height="70px" />
         <input type="checkbox" id="checkbox" />
         <label for="checkbox" id="icon">
           <svg

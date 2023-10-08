@@ -18,10 +18,10 @@ export const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5001/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
@@ -29,14 +29,14 @@ export const Login = () => {
       if (response.ok) {
         const data = await response.json();
         // Store the JWT token in local storage or state for future authenticated requests
-        localStorage.setItem('token', data.token);
+        localStorage.setItem("token", data.token);
         // Redirect or perform actions for successful login
       } else {
         // Handle login failure (e.g., display an error message)
-        console.error('Login failed');
+        console.error("Login failed");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -72,13 +72,25 @@ export const Login = () => {
             Or SignUp Using
           </p>
           <div className="icons">
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <i className="fa fa-facebook-f"></i>
             </a>
-            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://twitter.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <i className="fa fa-twitter"></i>
             </a>
-            <a href="https://mail.google.com/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://mail.google.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <i className="fa fa-google"></i>
             </a>
           </div>
