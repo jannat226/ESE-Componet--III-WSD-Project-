@@ -34,7 +34,7 @@ export const Login = () => {
             onChange={handlePassword}
             required
           />
-          <span>Forgot Password</span>
+          <span>Forgot Password?</span>
           <button>Login</button>
 
           <p>
