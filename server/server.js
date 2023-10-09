@@ -8,11 +8,11 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5000;
 
 // MongoDB connection
 mongoose.connect(
-  "mongodb+srv://suraj2023:{pass}@cluster0.awkkupy.mongodb.net/timecapsuleapp?retryWrites=true&w=majority",
+  "mongodb+srv://suraj2023:12345@cluster0.awkkupy.mongodb.net/timecapsuleapp?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
@@ -22,6 +22,7 @@ app.use(cors({ origin: "http://localhost:3000" }));
 
 // Define MongoDB User Schema and Model
 const userSchema = new mongoose.Schema({
+  name: String,
   email: String,
   password: String,
 });
@@ -31,11 +32,11 @@ const User = mongoose.model("User", userSchema);
 // Routes
 
 // Registration
-app.post("/register", async (req, res) => {
+app.post("/signup", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ email, password: hashedPassword });
+    const user = new User({ name, email, password: hashedPassword });
     await user.save();
     res.status(201).json({ message: "Registration successful" });
   } catch (error) {
