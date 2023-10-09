@@ -12,7 +12,7 @@ const port = process.env.PORT || 5001;
 
 // MongoDB connection
 mongoose.connect(
-  "mongodb+srv://suraj2023:{password}@cluster0.awkkupy.mongodb.net/timecapsuleapp?retryWrites=true&w=majority",
+  "mongodb+srv://suraj2023:{pass}@cluster0.awkkupy.mongodb.net/timecapsuleapp?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
