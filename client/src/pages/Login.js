@@ -18,7 +18,7 @@ export const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5001/login", {
+      const response = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export const Login = () => {
           <button type="submit">Login</button>
 
           <p>
-            <a href="/signUp" id="signUp">
+            <a href="/signup" id="signUp">
               SignUp{" "}
             </a>
             Or SignUp Using
