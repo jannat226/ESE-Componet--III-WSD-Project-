@@ -129,25 +129,25 @@ app.get('/api/getUserName', async (req, res) => {
 app.post('/submitData', upload.single('file'), async (req, res) => {
   try {
     const { email,dateTime } = req.body;
-    console.log(req.body.file);
+    console.log(req.body);
 
     // Check if a file was uploaded
-    if (!req.body.file) {
+    if (!req.file) {
       throw new Error("No file uploaded");
     }
 
     // Generate a unique filename
-    const filename = crypto.randomBytes(16).toString("hex") + path.extname(req.body.file);
+    const filename = crypto.randomBytes(16).toString("hex") + path.extname(req.file);
 
     // Create a writable stream to store the file in GridFS
     const writeStream = gfs.createWriteStream({
       filename,
       mode: "w",
-      content_type: req.body.file.mimetype,
+      content_type: req.file.mimetype,
     });
 
     // Pipe the uploaded file data to the GridFS stream
-    writeStream.write(req.body.file.buffer);
+    writeStream.write(req.file.buffer);
 
     // Save the CapsuleData with the file's GridFS ID
     const capsuleData = new CapsuleData({
