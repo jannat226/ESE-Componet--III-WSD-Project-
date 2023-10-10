@@ -1,4 +1,5 @@
 import { Navbar } from "../components/Navbar";
+import { Footer } from "../components/Footer";
 import "./Explore.css";
 export const Explore = () => {
   return (
@@ -81,6 +82,7 @@ export const Explore = () => {
           </section>
         </body>
       </div>
+      <Footer />
     </>
   );
 };
