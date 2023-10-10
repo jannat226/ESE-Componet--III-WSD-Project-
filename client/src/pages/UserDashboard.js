@@ -34,31 +34,28 @@ export const UserDashboard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Prepare the data to be submitted
-    const formData = {
-      email,
-      file: file ? file.name : '', // You can handle file uploads separately
-      dateTime,
-    };
-
+  
     try {
       const token = localStorage.getItem('token');
       if (!token) {
         navigate('/login', { replace: true });
         return;
       }
-
-      // Send a POST request to submit the data
+  
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('dateTime', dateTime);
+      formData.append('file', file); // Append the file directly
+  
+      // Send a POST request with FormData
       const response = await fetch('http://localhost:5000/submitData', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(formData),
+        body: formData,
       });
-
+  
       if (response.status === 201) {
         // Data submitted successfully, you can handle the response accordingly
         console.log('Data submitted successfully');
@@ -69,7 +66,7 @@ export const UserDashboard = () => {
     } catch (error) {
       console.error('Error submitting data:', error);
     }
-  };
+  };  
 
   const handleLogout = () => {
     localStorage.removeItem('token');

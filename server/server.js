@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const multer = require("multer");
 const Grid = require("gridfs-stream");
+// const stream = require('stream');
 const crypto = require("crypto");
 const path = require("path");
 
@@ -16,12 +17,11 @@ const port = process.env.PORT || 5000;
 
 // MongoDB connection
 mongoose.connect(
-  'mongodb+srv://suraj2023:12345@cluster0.awkkupy.mongodb.net/timecapsuleapp?retryWrites=true&w=majorit',
+  'mongodb+srv://suraj2023:12345@cluster0.awkkupy.mongodb.net/timecapsuleapp?retryWrites=true&w=majority',
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
 let gfs; // Declare gfs as a global variable
-
 // When the connection is successful
 mongoose.connection.on('connected', () => {
   console.log('MongoDB connected successfully');
@@ -34,7 +34,6 @@ mongoose.connection.on('connected', () => {
   if (!conn.db) {
     throw new Error('MongoDB connection is not available.');
   }
-
   gfs = Grid(conn.db);
 });
 
@@ -65,7 +64,7 @@ const User = mongoose.model("User", userSchema);
 // Define MongoDB Capsule Data Schema and Model
 const capsuleDataSchema = new mongoose.Schema({
   email: String,
-  file: String, // Store the GridFS file ID
+  file: mongoose.Schema.Types.ObjectId, // Store the GridFS file ID
   dateTime: Date,
 });
 
@@ -129,7 +128,6 @@ app.get('/api/getUserName', async (req, res) => {
 app.post('/submitData', upload.single('file'), async (req, res) => {
   try {
     const { email,dateTime } = req.body;
-    console.log(req.body);
 
     // Check if a file was uploaded
     if (!req.file) {
@@ -137,7 +135,7 @@ app.post('/submitData', upload.single('file'), async (req, res) => {
     }
 
     // Generate a unique filename
-    const filename = crypto.randomBytes(16).toString("hex") + path.extname(req.file);
+    const filename = crypto.randomBytes(16).toString("hex") + path.extname(req.file.originalname);
 
     // Create a writable stream to store the file in GridFS
     const writeStream = gfs.createWriteStream({
@@ -165,6 +163,7 @@ app.post('/submitData', upload.single('file'), async (req, res) => {
     res.status(500).json({ error: "Data submission failed" });
   }
 });
+
 
 // Start server
 app.listen(port, () => {
