@@ -1,11 +1,13 @@
-import "./login.css";
-import { useState } from "react";
-import { Navbar } from "../components/Navbar";
-import { Footer } from "../components/Footer";
+import React, { useState } from 'react';
+import './login.css';
+import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
+import { useNavigate } from 'react-router-dom'; // Import React Router's useNavigate
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Initialize React Router's useNavigate
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -18,25 +20,24 @@ export const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/login", {
-        method: "POST",
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        // Store the JWT token in local storage or state for future authenticated requests
-        localStorage.setItem("token", data.token);
-        // Redirect or perform actions for successful login
+        localStorage.setItem('token', data.token);
+        // Redirect to the UserDashboard on successful login
+        navigate('/userdashboard',{replace:true});  // Use React Router to navigate
       } else {
-        // Handle login failure (e.g., display an error message)
-        console.error("Login failed");
+        console.error('Login failed');
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
     }
   };
 

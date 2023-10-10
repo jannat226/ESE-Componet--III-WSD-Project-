@@ -8,6 +8,9 @@ import { Login } from "./pages/Login";
 import { Contact } from "./pages/Contact";
 import { Explore } from "./pages/Explore";
 import { Signup } from "./pages/Signup";
+// import ProfileDropdown from './ProfileDropdown';
+// import { UserProvider } from './UserContext';
+import { UserDashboard } from "./pages/UserDashboard";
 
 export const App = () => {
   // Create a style object with the backgroundColor property
@@ -21,6 +24,9 @@ export const App = () => {
           <Route path="/contactus" exact Component={Contact} />
           <Route path="/login" exact Component={Login} />
           <Route path="/signup" exact Component={Signup} />
+          <Route path="/userdashboard" exact Component={UserDashboard} />
+          
+
           {/* <Route path="/timeCapsules" exact Component={TimeCapsules} /> */}
         </Routes>
       </Router>
