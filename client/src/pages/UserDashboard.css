@@ -62,7 +62,9 @@ margin: 1000px ;
 width:38% !important;
 
 }
-
+input[type="datetime-local"]{
+  background-color: black;
+}
 input[type="email"]{
 align-items: center;
 padding-left: 10px !important;
