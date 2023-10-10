@@ -6,8 +6,12 @@
     position: relative;
     width:100%;
     padding: 15px;
-    background: linear-gradient(to right, #08979a, #0cc6c9, #0da7a9, #0a5a5c);
+    background: linear-gradient(to right, #0c7577, #137e80, #148688);
   }
+.loginContainer{
+  margin:30px;
+  align-items: center;
+}
   
   .container .form-1 {
     display: flex;
@@ -24,6 +28,7 @@
   
   .form-1 h1 {
     text-align: center;
+    color:black;
     margin-top: 1.50rem;
     margin-bottom: 1.78rem;
   }
@@ -31,17 +36,17 @@
   input[type="email"],
   input[type="password"] {
     border: 1px solid #b0c3ba;
-    padding: 13px;
+   padding-bottom: 20px;;
     border-radius: 8px;
     /* outline: none; */
     /* border-bottom: 1px solid; */
     background: none;
-    margin: 0.9rem 2rem;
+    /* margin: 0.9rem 2rem; */
     font-size: 1rem;
   }
   
   label {
-    margin: 0 2rem;
+    /* margin: 0 2rem; */
   }
   
   span {

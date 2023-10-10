@@ -1,61 +1,229 @@
-/* UserDashboard.css */
 
-.user-dashboard {
-    margin: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+.flex-container{
+   
+  display: flex;
+  flex-wrap: nowrap;
+  color:aliceblue;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  /* height: 30% !important;; */
   
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  label {
-    margin: 10px 0;
-    font-weight: bold;
-  }
-  
-  input[type="email"],
-  input[type="file"],
-  input[type="datetime-local"] {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-  }
-  
-  input[type="file"] {
-    padding: 5px;
-  }
-  
-  button[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Optional: Add some spacing to the button */
-  button[type="submit"] {
-    margin-top: 10px;
-  }
+}
+.flex-item1{
+  width:30%;
+  height:600px;
+}
+.flex-item2{
+  background-color: rgba(12, 143, 150, 0.988);
+  width:70%;
+  height:670px;
+  border: 2px solid #333333; /* Specify border color and width */
+border-radius: 10px; 
+}
+#headingcontent{
+padding-top: 30px;
+}
+.contentUpload{
+  margin-top:40px;
+  margin-left: 100px;
+  margin-bottom:0px;
+  background-color: rgba(27, 6, 19, 0.988);
+  width:80%;
+  height:600px;
+  border: 2px ; /* Specify border color and width */
+border-radius: 10px; 
+}
+#contentlabel { 
+  font-family:sans-serif !important;
+  margin-bottom: 0px;
+  margin-right:13px;
+ 
+  line-height: 50px;
+  padding: 0px;
+  color: white;
+  text-decoration: none;
+}
+#hinput{
+line-height: 20px;
+padding: 0px;
+width:38% !important;
+align-items: center;
+}
+#heinput{
+padding-top: 0px;
+margin: 1000px ;
+width:38% !important;
 
-  .welcome-message, label{
-    color: white;
-  }
+}
+
+input[type="email"]{
+align-items: center;
+padding-left: 10px !important;
+margin:0px !important;
+}
+#contentform{
+margin-top:40px;
+margin-left :80px;
+}
+
+#sideimg{
+  height:460px;
+  width:100%;
+
+  
+  
+}
+.nav-item3{
+  height:700px;
+}
+.vnav{
+  /* background-color: rgb(68, 67, 67); */
+  margin-top: 20px;
+}
+#logout{
+  background-color: black !important;
+}
+
+.content-slider {
+width: 100px;
+height: 460px;
+z-index: -1;
+border-radius: 2px;
+}
+.slider {
+height: 460px;
+width: 428px;
+margin: 40px auto 0;
+overflow: hidden;
+position: relative;
+border-radius: 10px;
+}
+.mask {
+overflow: hidden;
+height: 460px;
+width: 680px;
+}
+.slider ul {
+margin: 0;
+padding: 0;
+position: relative;
+width: 3400px; /* 680px * number of slides */
+}
+.slider li {
+width: 430px;
+height: 320px;
+position: absolute;
+left: 680px;
+list-style: none;
+}
+.slider .quote {
+font-size: 40px;
+font-style: italic;
+}
+.slider .source {
+font-size: 20px;
+text-align: right;
+}
+.slider li:hover {
+
+-webkit-animation-play-state: paused;
+animation-play-state: paused;}
+.slider li.anim1 {
+-webkit-animation: cycle1 15s linear infinite;
+animation: cycle1 15s linear infinite;
+}
+.slider li.anim2 {
+-webkit-animation: cycle2 15s linear infinite;
+animation: cycle2 15s linear infinite;
+}
+.slider li.anim3 {
+-webkit-animation: cycle3 15s linear infinite;
+animation: cycle3 15s linear infinite;
+}
+.slider li.anim4 {
+-webkit-animation: cycle4 15s linear infinite;
+animation: cycle4 15s linear infinite;
+}
+.slider li.anim5 {
+-webkit-animation: cycle5 15s linear infinite;
+animation: cycle5 15s linear infinite;
+}
+@keyframes cycle1 {
+0%, 20% {
+  left: 0px;
+  opacity: 1;
+}
+24%, 100% {
+  left: -680px;
+  opacity: 0;
+}
+}
+@keyframes cycle2 {
+0%, 20% {
+  left: 680px;
+  opacity: 0;
+}
+24%, 40% {
+  left: 0px;
+  opacity: 1;
+}
+44%, 100% {
+  left: -680px;
+  opacity: 0;
+}
+}
+@keyframes cycle3 {
+0%, 40% {
+  left: 680px;
+  opacity: 0;
+}
+44%, 60% {
+  left: 0px;
+  opacity: 1;
+}
+64%, 100% {
+  left: -680px;
+  opacity: 0;
+}
+}
+@keyframes cycle4 {
+0%, 60% {
+  left: 680px;
+  opacity: 0;
+}
+64%, 80% {
+  left: 0px;
+  opacity: 1;
+}
+84%, 100% {
+  left: -680px;
+  opacity: 0;
+}
+}
+@keyframes cycle5 {
+0%, 80% {
+  left: 680px;
+  opacity: 0;
+}
+84%, 100% {
+  left: 0px;
+  opacity: 1;
+}
+}
+
+
+#container {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          background-color: #8EDDBE;
+      }
+#inner-div {
+          text-align: center;
+          padding: 20px;
+      }
+#logout{
+  background-color: none !important;
+}

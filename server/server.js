@@ -16,15 +16,15 @@ const port = process.env.PORT || 5000;
 
 // MongoDB connection
 mongoose.connect(
-  'mongodb+srv://suraj2023:12345@cluster0.awkkupy.mongodb.net/timecapsuleapp?retryWrites=true&w=majorit',
+  "mongodb+srv://suraj2023:12345@cluster0.awkkupy.mongodb.net/timecapsuleapp?retryWrites=true&w=majorit",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
 let gfs; // Declare gfs as a global variable
 
 // When the connection is successful
-mongoose.connection.on('connected', () => {
-  console.log('MongoDB connected successfully');
+mongoose.connection.on("connected", () => {
+  console.log("MongoDB connected successfully");
 
   // Create a GridFS stream connection
   const conn = mongoose.connection;
@@ -32,22 +32,21 @@ mongoose.connection.on('connected', () => {
 
   // Check if the 'db' variable is defined before creating the Grid object
   if (!conn.db) {
-    throw new Error('MongoDB connection is not available.');
+    throw new Error("MongoDB connection is not available.");
   }
 
   gfs = Grid(conn.db);
 });
 
 // When an error occurs during connection
-mongoose.connection.on('error', (err) => {
-  console.error('MongoDB connection error:', err);
+mongoose.connection.on("error", (err) => {
+  console.error("MongoDB connection error:", err);
 });
 
 // When the connection is disconnected
-mongoose.connection.on('disconnected', () => {
-  console.log('MongoDB disconnected');
+mongoose.connection.on("disconnected", () => {
+  console.log("MongoDB disconnected");
 });
-
 
 // Middleware
 app.use(bodyParser.json());
@@ -74,7 +73,6 @@ const CapsuleData = mongoose.model("CapsuleData", capsuleDataSchema);
 // Set up multer for file uploads
 const storage = multer.memoryStorage(); // Store files in memory
 const upload = multer({ storage });
-
 
 // Registration
 app.post("/signup", async (req, res) => {
@@ -109,26 +107,26 @@ app.post("/login", async (req, res) => {
 });
 
 // New route to fetch user's name
-app.get('/api/getUserName', async (req, res) => {
+app.get("/api/getUserName", async (req, res) => {
   try {
-    const token = req.headers.authorization.split(' ')[1]; // Extract the token from the headers
-    const decoded = jwt.verify(token, 'secret-key');
+    const token = req.headers.authorization.split(" ")[1]; // Extract the token from the headers
+    const decoded = jwt.verify(token, "secret-key");
     const user = await User.findById(decoded.userId);
 
     if (!user) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
 
     res.status(200).json({ name: user.name });
   } catch (error) {
-    res.status(401).json({ error: 'Unauthorized' });
+    res.status(401).json({ error: "Unauthorized" });
   }
 });
 
 // Submit Form Data with File Upload
-app.post('/submitData', upload.single('file'), async (req, res) => {
+app.post("/submitData", upload.single("file"), async (req, res) => {
   try {
-    const { email,dateTime } = req.body;
+    const { email, dateTime } = req.body;
     console.log(req.body);
 
     // Check if a file was uploaded
@@ -137,7 +135,8 @@ app.post('/submitData', upload.single('file'), async (req, res) => {
     }
 
     // Generate a unique filename
-    const filename = crypto.randomBytes(16).toString("hex") + path.extname(req.file);
+    const filename =
+      crypto.randomBytes(16).toString("hex") + path.extname(req.file);
 
     // Create a writable stream to store the file in GridFS
     const writeStream = gfs.createWriteStream({
@@ -161,7 +160,7 @@ app.post('/submitData', upload.single('file'), async (req, res) => {
 
     res.status(201).json({ message: "Data submitted successfully" });
   } catch (error) {
-    console.error('Error submitting data:', error);
+    console.error("Error submitting data:", error);
     res.status(500).json({ error: "Data submission failed" });
   }
 });
