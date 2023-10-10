@@ -62,7 +62,7 @@ const User = mongoose.model("User", userSchema);
 
 // Define MongoDB Capsule Data Schema and Model
 const capsuleDataSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, 
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   email: String,
   file: mongoose.Schema.Types.ObjectId, // Store the GridFS file ID
   dateTime: Date,
@@ -126,7 +126,7 @@ app.get("/api/getUserName", async (req, res) => {
 // Submit Form Data with File Upload
 app.post("/submitData", upload.single("file"), async (req, res) => {
   try {
-    const { email,dateTime } = req.body;
+    const { email, dateTime } = req.body;
 
     // Check if a file was uploaded
     if (!req.file) {
@@ -149,7 +149,7 @@ app.post("/submitData", upload.single("file"), async (req, res) => {
     // Get the user's ID from the JWT
     const token = req.headers.authorization.split(" ")[1]; // Extract the token from the headers
     const decoded = jwt.verify(token, "secret-key");
-    const userId = decoded.userId;    
+    const userId = decoded.userId;
 
     // Save the CapsuleData with the file's GridFS ID
     const capsuleData = new CapsuleData({
@@ -168,6 +168,83 @@ app.post("/submitData", upload.single("file"), async (req, res) => {
     res.status(500).json({ error: "Data submission failed" });
   }
 });
+
+// Add this route to fetch user-specific data based on the token
+app.get("/api/getUserData", async (req, res) => {
+  try {
+    // Extract the token from the headers
+    const token = req.headers.authorization.split(" ")[1];
+
+    // Verify the token and decode the user ID
+    const decoded = jwt.verify(token, "secret-key");
+
+    // Find the user's data based on the decoded user ID
+    const userData = await CapsuleData.find({ user: decoded.userId });
+
+    if (!userData) {
+      throw new Error("User data not found");
+    }
+
+    // Send the user's data as a response
+    res.status(200).json({ userData });
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    res.status(500).json({ error: "Error fetching user data" });
+  }
+});
+
+
+// Add a route for viewing files
+app.get("/viewFile/:fileId", (req, res) => {
+  try {
+    const fileId = req.params.fileId;
+    const token1 = req.query.token;
+
+    // Check if the fileId is valid
+    if (!fileId) {
+      return res.status(400).json({ error: "Invalid file ID" });
+    }
+
+    // Add this code before the authorization check
+    console.log("Authorization header:", token1);
+
+    // Check if the authorization header is present
+    if (!token1) {
+      console.error("No authorization header found.");
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    // Split the authorization header and get the token
+    const token = token1.split(" ")[1];
+
+    // Find the corresponding CapsuleData record in the database
+    CapsuleData.findOne({ file: fileId }, (err, capsuleData) => {
+      if (err) {
+        console.error("Error finding CapsuleData:", err);
+        return res.status(500).json({ error: "Error finding CapsuleData" });
+      }
+
+      if (!capsuleData) {
+        return res.status(404).json({ error: "Capsule data not found" });
+      }
+
+      // Retrieve the file from GridFS based on the file ID
+      const readStream = gfs.createReadStream({ _id: fileId });
+
+      // Set the appropriate content type based on the file's content type
+      // You may need to determine the content type based on the file extension
+      res.contentType(capsuleData.file.contentType);
+
+      // Pipe the file stream to the response object to send the file to the client
+      readStream.pipe(res);
+    });
+  } catch (error) {
+    console.error("Error viewing file:", error);
+    res.status(500).json({ error: "Error viewing file" });
+  }
+});
+
+
 
 
 // Start server

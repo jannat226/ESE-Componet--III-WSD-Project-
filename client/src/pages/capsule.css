@@ -8,11 +8,18 @@
     align-items: center;
     /* margin-bottom: '16px'; */
   background-color: aliceblue;
-  width:300px
+  width:300px;
+  margin-bottom: 10px;
 }
-.flex-container {
+#head {
+    color:white;
+    padding-top: 50px;
+    margin-bottom: 50px;
+}
+.card-container {
     display: flex;
-  
+    flex-wrap: wrap; /* Allows cards to wrap to the next row if needed */
+    justify-content: space-between; /* Adjust as needed to control spacing */
   }
   
 .flex-containerD > div {
@@ -23,7 +30,7 @@
 }
 #cardHeading{
     background-color: cadetblue !important;
-    color:blueviolet;
+    color:white;
     width: 93%;
     margin-top:15px;
     padding-left: 80px;
@@ -34,29 +41,11 @@
 }
 #cardHead{
     background-color: #f1f1f1;
-    height:700px;
-    padding: 20px;
+    height: auto;
+    padding: 50px;
     align-items: center;
-}
-/* }
-.card{
-    border: '1px solid #ccc';
- 
-    padding: 0px;
-    border-radius: '4px';
-    box-shadow: '0 2px 4px rgba(0, 0, 0, 0.1)';
-    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
     
-  background-color: aliceblue;
 }
-#cardHeading{
-    padding-left: 60px;
-    background-color: cadetblue !important;
-    width: 100%;
-    align-items: center;
-    color:blueviolet;
-}
-#cardBody{
-    background-color: blue;
-    padding: 10px;
-}  */

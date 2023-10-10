@@ -82,13 +82,13 @@ export const UserDashboard = () => {
           <div className="flex-item1">
             <ul className="nav flex-column vnav">
               <li className="nav-item">
-                <a className="nav-link " href="#">
+                <a className="nav-link " href="/yourcapsules">
                   Your Capsules
                 </a>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/userdashboard">
                   Create Capsule
                 </a>
               </li>

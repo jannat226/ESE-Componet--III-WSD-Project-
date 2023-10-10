@@ -8,6 +8,7 @@ import { Login } from "./pages/Login";
 import { Contact } from "./pages/Contact";
 import { Explore } from "./pages/Explore";
 import { Signup } from "./pages/Signup";
+import { YourCapsule } from "./pages/YourCapsule";
 // import ProfileDropdown from './ProfileDropdown';
 // import { UserProvider } from './UserContext';
 import { UserDashboard } from "./pages/UserDashboard";
@@ -25,7 +26,7 @@ export const App = () => {
           <Route path="/login" exact Component={Login} />
           <Route path="/signup" exact Component={Signup} />
           <Route path="/userdashboard" exact Component={UserDashboard} />
-          
+          <Route path="/yourcapsules" exact Component={YourCapsule} />
 
           {/* <Route path="/timeCapsules" exact Component={TimeCapsules} /> */}
         </Routes>
