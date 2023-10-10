@@ -62,6 +62,7 @@ const User = mongoose.model("User", userSchema);
 
 // Define MongoDB Capsule Data Schema and Model
 const capsuleDataSchema = new mongoose.Schema({
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, 
   email: String,
   file: mongoose.Schema.Types.ObjectId, // Store the GridFS file ID
   dateTime: Date,
@@ -145,9 +146,15 @@ app.post("/submitData", upload.single("file"), async (req, res) => {
     // Pipe the uploaded file data to the GridFS stream
     writeStream.write(req.file.buffer);
 
+    // Get the user's ID from the JWT
+    const token = req.headers.authorization.split(" ")[1]; // Extract the token from the headers
+    const decoded = jwt.verify(token, "secret-key");
+    const userId = decoded.userId;    
+
     // Save the CapsuleData with the file's GridFS ID
     const capsuleData = new CapsuleData({
-      email,
+      user: userId,
+      email: email,
       file: writeStream.id, // Store the GridFS file ID
       dateTime: new Date(dateTime),
     });
