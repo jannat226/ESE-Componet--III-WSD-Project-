@@ -50,7 +50,12 @@ line-height: 20px;
 padding: 0px;
 width:38% !important;
 align-items: center;
+color: white;
 }
+::placeholder{
+  color: white;
+}
+
 #heinput{
 padding-top: 0px;
 margin: 1000px ;

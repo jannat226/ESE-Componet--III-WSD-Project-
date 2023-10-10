@@ -152,23 +152,23 @@ export const UserDashboard = () => {
           <div className="flex-item2">
             <div className="contentUpload">
               <h3 id="headingcontent">Experience nostalgia in future</h3>
-              <form id="contentform" onSubmit={handleSubmit}>
+              <form id="contentform" onSubmit={handleSubmit} encType="multipart/form-data">
                 <label id="contentlabel">Upload File : </label>
-
                 <input
                   type="file"
-                  accept="image/*"
+                  name="file"
                   id="hinput"
                   onChange={(e) => setFile(e.target.files[0])}
+                  required
                 />
                 <br />
-
                 <label id="contentlabel">Set Time : </label>
                 <input
-                  type="time"
+                  type="datetime-local"
                   id="hinput"
                   value={dateTime}
                   onChange={(e) => setDateTime(e.target.value)}
+                  required
                 />
                 <br />
                 <label id="contentlabel">Email Address :</label>
@@ -179,6 +179,7 @@ export const UserDashboard = () => {
                   id="hinput"
                   placeholder="Enter the recipent's email"
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
 
                 <button type="submit">Save</button>
@@ -189,41 +190,5 @@ export const UserDashboard = () => {
       </div>
       <Footer />
     </>
-    // <div className="content">
-    //   <div className="welcome-message">Welcome, {name}!</div>
-    //   <form onSubmit={handleSubmit} encType="multipart/form-data">
-    //     <div>
-    //       <label>Email:</label>
-    //       <input
-    //         type="email"
-    //         value={email}
-    //         onChange={(e) => setEmail(e.target.value)}
-    //         required
-    //       />
-    //     </div>
-    //     <div>
-    //       <label>File Upload:</label>
-    //       <input
-    //         type="file"
-    //         name="file"
-    //         onChange={(e) => setFile(e.target.files[0])}
-    //         required
-    //       />
-    //     </div>
-    //     <div>
-    //       <label>Date and Time:</label>
-    //       <input
-    //         type="datetime-local"
-    //         value={dateTime}
-    //         onChange={(e) => setDateTime(e.target.value)}
-    //         required
-    //       />
-    //     </div>
-    //     <div>
-    //       <button type="submit">Submit</button>
-    //     </div>
-    //   </form>
-    //   <button onClick={handleLogout}>Logout</button>
-    // </div>
   );
 };

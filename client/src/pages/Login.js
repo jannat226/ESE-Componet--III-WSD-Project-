@@ -75,7 +75,7 @@ export const Login = () => {
               <a href="/signup" id="signUp">
                 SignUp{" "}
               </a>
-              Or SignUp Using
+              (Or) SignUp Using
             </p>
             <div className="icons">
               <a
