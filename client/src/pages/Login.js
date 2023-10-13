@@ -29,13 +29,14 @@ export const Login = () => {
       });
 
       if (response.ok) {
+        alert("Login Success!");
         const data = await response.json();
         localStorage.setItem("token", data.token);
         // Redirect to the UserDashboard on successful login
         navigate("/userdashboard", { replace: true }); // Use React Router to navigate
       } else {
-        console.error("Login failed");
-        alert("Login Failed, check your email or password again");
+        // console.error("Login failed");
+        alert("Login Failed! email or password is incorrect.");
       }
     } catch (error) {
       console.error("Error:", error);

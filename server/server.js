@@ -136,6 +136,9 @@ app.post("/submitData", upload.single("file"), async (req, res) => {
     // Generate a unique filename
     const filename = crypto.randomBytes(16).toString("hex") + path.extname(req.file.originalname);
 
+        // Log the content type to verify it's correctly captured
+    console.log("Content Type:", req.file.mimetype);
+
     // Create a writable stream to store the file in GridFS
     const writeStream = gfs.createWriteStream({
       filename,
@@ -198,42 +201,38 @@ app.get("/api/getUserData", async (req, res) => {
 app.get("/viewFile/:fileId", (req, res) => {
   try {
     const fileId = req.params.fileId;
-    const token1 = req.query.token;
+    const token = req.query.token;
 
-    // Check if the fileId is valid
     if (!fileId) {
       return res.status(400).json({ error: "Invalid file ID" });
     }
 
-    // Add this code before the authorization check
-    console.log("Authorization header:", token1);
-
-    // Check if the authorization header is present
-    if (!token1) {
-      console.error("No authorization header found.");
+    if (!token) {
+      console.error("No authorization token found.");
       return res.status(401).json({ error: "Unauthorized" });
     }
 
-    // Split the authorization header and get the token
-    const token = token1.split(" ")[1];
-
-    // Find the corresponding CapsuleData record in the database
-    CapsuleData.findOne({ file: fileId }, (err, capsuleData) => {
+    // Query the fs.files collection to get the file's metadata
+    gfs.files.findOne({ _id: fileId }, (err, file) => {
       if (err) {
-        console.error("Error finding CapsuleData:", err);
-        return res.status(500).json({ error: "Error finding CapsuleData" });
+        console.error("Error finding file metadata:", err);
+        return res.status(500).json({ error: "Error finding file metadata" });
       }
 
-      if (!capsuleData) {
-        return res.status(404).json({ error: "Capsule data not found" });
+      if (!file) {
+        return res.status(404).json({ error: "File not found" });
       }
 
-      // Retrieve the file from GridFS based on the file ID
+      // Set the content type from the file metadata
+      res.contentType(file.contentType);
+
       const readStream = gfs.createReadStream({ _id: fileId });
 
-      // Set the appropriate content type based on the file's content type
-      // You may need to determine the content type based on the file extension
-      res.contentType(capsuleData.file.contentType);
+      // Handle any errors that may occur during the stream piping
+      readStream.on('error', (error) => {
+        console.error("Error streaming file:", error);
+        res.status(500).json({ error: "Error streaming file" });
+      });
 
       // Pipe the file stream to the response object to send the file to the client
       readStream.pipe(res);
@@ -243,6 +242,8 @@ app.get("/viewFile/:fileId", (req, res) => {
     res.status(500).json({ error: "Error viewing file" });
   }
 });
+
+
 
 
 

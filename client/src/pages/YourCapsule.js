@@ -36,10 +36,18 @@ export const YourCapsule = () => {
       });
   };
 
-  const handleViewFile = (fileId, token) => {
-    // When the "View File" link is clicked, open a new window with the file URL and include the Authorization header
+  const handleViewFile = (fileId) => {
+    const token = localStorage.getItem("token"); // Get the token from local storage
+    if (!token) {
+      console.error("No authorization token found.");
+      // Handle the case where the token is missing, perhaps by redirecting to a login page or displaying an error message.
+      return;
+    }
+    // When the "View File" link is clicked, open a new window with the file URL and include the Authorization header as a query parameter.
     window.open(`http://localhost:5000/viewFile/${fileId}?token=${token}`, "_blank");
   };
+  
+  
 
   return (
     <>

@@ -33,10 +33,12 @@ export const Signup = () => {
 
       if (response.ok) {
         // Registration was successful, you can redirect or perform actions here
-        console.log("Registration successful");
+        alert("Registration successful");
+        // console.log("Registration successful");
       } else {
         // Handle registration failure (e.g., display an error message)
-        console.error("Registration failed");
+        alert("Registration failed");
+        // console.error("Registration failed");
       }
     } catch (error) {
       console.error("Error:", error);

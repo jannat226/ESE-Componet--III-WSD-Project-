@@ -59,9 +59,11 @@ export const UserDashboard = () => {
   
       if (response.status === 201) {
         // Data submitted successfully, you can handle the response accordingly
-        console.log("Data submitted successfully");
+        alert("Capsule Created Successfully!");
+        // console.log("Data submitted successfully");
       } else {
         // Data submission failed, handle the error
+        alert("Capsule Creation Failed!");
         console.error("Data submission failed");
       }
     } catch (error) {
